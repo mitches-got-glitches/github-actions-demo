@@ -1,18 +1,15 @@
 install:
-	pip install --upgrade pip &&\
-		pip install -r requirements.txt
+	$(call install-reqs, requirements.txt)
 
 install-gcp:
-	pip install --upgrade pip &&\
-		pip install -r requirements-gcp.txt
+	$(call install-reqs, requirements-gcp.txt)
 
 install-aws:
-	pip install --upgrade pip &&\
-		pip install -r requirements-aws.txt
+	$(call install-reqs, requirements-aws.txt)
 
 install-amazon-linux:
-	pip install --upgrade pip &&\
-		pip install -r amazon-linux.txt
+	$(call install-reqs, amazon-linux.txt)
+
 lint:
 	pylint --disable=R,C hello.py
 
@@ -21,3 +18,5 @@ format:
 
 test:
 	python -m pytest -vv --cov=hello test_hello.py
+
+install-reqs = pip install --upgrade pip && pip install -r $(1)
